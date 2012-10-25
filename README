@@ -1,4 +1,4 @@
 This is used for learning opengl.
 
 build
- clang foo.c -lglut -lGL
+ clang foo.c -lglut -lGL -lGLEW
