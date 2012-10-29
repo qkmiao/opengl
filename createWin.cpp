@@ -22,23 +22,28 @@ struct Vector3f
 static void RenderSceneCB()
 {
   glClear(GL_COLOR_BUFFER_BIT);
-  glEnableVertexAttribArray(0);
+  //glEnableVertexAttribArray(0);
+  glEnableClientState(GL_VERTEX_ARRAY);
   glBindBuffer(GL_ARRAY_BUFFER, VBO);
-  glVertexAttribPointer(0,3,GL_FLOAT, GL_FALSE,0,0);
-  glDrawArrays(GL_POINTS,0,1);
-  glDisableVertexAttribArray(0);
+  //glVertexAttribPointer(0,3,GL_FLOAT, GL_FALSE,0,0);
+  glVertexPointer(3,GL_FLOAT,0,NULL);
+  glDrawArrays(GL_TRIANGLES,0,3);
+  //glDisableVertexAttribArray(0);
+  glDisableClientState(GL_VERTEX_ARRAY);
   glutSwapBuffers();
 }
 
 static void InitializeGlutCallbacks()
 {
-  glutDisplayFunc(RenderSceneCB);
+  glutDisplayFunc(&RenderSceneCB);
 }
 
 static void CreateVertexBuffer()
 {
-  Vector3f vertices[1];
-  vertices[0] = Vector3f(0.0f, 0.0f, 0.0f);
+  Vector3f vertices[3];
+  vertices[0] = Vector3f(-1.0f, -1.0f, 0.0f);
+  vertices[1] = Vector3f(1.0f, -1.0f, 0.0f);
+  vertices[2] = Vector3f(0.0f, 1.0f, 0.0f);
   glGenBuffers(1,&VBO);
   glBindBuffer(GL_ARRAY_BUFFER,VBO);
   glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
@@ -61,7 +66,8 @@ main(int argc, char** argv)
     return 1;
   }
 
-  glClearColor(0.0f,0.0f,0.0f,0.0f);
+  glClearColor(0.0f,0.0f,0.3f,0.0f);
+  CreateVertexBuffer();
   glutMainLoop();
 
   return 0;
