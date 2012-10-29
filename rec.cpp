@@ -34,9 +34,44 @@ void circle()
   glFlush();
 }
 
+void solidLine()
+{
+  glClear(GL_COLOR_BUFFER_BIT);
+  glPointSize(5.0f);
+  glLineWidth(5.0f);
+  glBegin(GL_LINES);
+    glVertex2f(0.0f, 0.0f);
+    glVertex2f(0.5f, 0.5f);
+  glEnd();
+  glFlush();
+}
+
+void square()
+{
+    glClear(GL_COLOR_BUFFER_BIT);
+    glPolygonMode(GL_FRONT, GL_FILL); // 设置正面为填充模式
+    glPolygonMode(GL_BACK, GL_LINE);  // 设置反面为线形模式
+    glFrontFace(GL_CW);              // 设置逆时针方向为正面
+    glBegin(GL_POLYGON);              // 按逆时针绘制一个正方形，在左下方
+        glVertex2f(-0.5f, -0.5f);
+        glVertex2f(0.0f, -0.5f);
+        glVertex2f(0.0f, 0.0f);
+        glVertex2f(-0.5f, 0.0f);
+    glEnd();
+    glBegin(GL_POLYGON);              // 按顺时针绘制一个正方形，在右上方
+        glVertex2f(0.0f, 0.0f);
+        glVertex2f(0.0f, 0.5f);
+        glVertex2f(0.5f, 0.5f);
+        glVertex2f(0.5f, 0.0f);
+    glEnd();
+    glFlush();
+}
+
 void myDisplay()
 {
-  circle();
+  //solidLine();
+  //circle();
+  square();
 }
 
 int main(int argc, char *argv[])
