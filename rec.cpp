@@ -1,4 +1,5 @@
 #include <GL/glut.h>
+#include <math.h>
 
 
 void myDisplay1(void)
@@ -8,7 +9,7 @@ void myDisplay1(void)
     glFlush();
 }
 
-void myDisplay()
+void myDisplay2()
 {
   glClear(GL_COLOR_BUFFER_BIT);
   glBegin(GL_TRIANGLES);
@@ -17,6 +18,25 @@ void myDisplay()
     glVertex3f(0.0f,0.0f,0.0f);
   glEnd();
   glFlush();
+}
+
+void circle()
+{
+  int i;
+  const int n = 200;
+  const GLfloat R = 0.5f;
+  const GLfloat Pi = 3.1415926536f;
+  glClear(GL_COLOR_BUFFER_BIT);
+  glBegin(GL_POLYGON);
+    for(i=0; i<n; i++)
+      glVertex2f(R*cos(2*Pi/n*i), R*sin(2*Pi/n*i));
+  glEnd();
+  glFlush();
+}
+
+void myDisplay()
+{
+  circle();
 }
 
 int main(int argc, char *argv[])
